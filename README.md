@@ -1,6 +1,6 @@
 # Real Estate Prediction in Madrid
 
-[<img src="img/header.jpg">](https://www.kaggle.com/mirbektoktogaraev/madrid-real-estate-market)
+[<img src="static/img/header.jpg">](https://www.kaggle.com/mirbektoktogaraev/madrid-real-estate-market)
 
 In this personal project, I will explore Real Estate data from houses in Madrid in order to train a model and predict
 properties prices.

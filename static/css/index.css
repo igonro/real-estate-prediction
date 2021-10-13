@@ -1,0 +1,50 @@
+body {
+    background-color: ghostwhite;
+    /* background-color: darkslategrey; */
+    /* overflow: hidden; */
+}
+h2 {
+    display: inline-block;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: gold;
+    text-decoration-thickness: 3px;
+}
+h5 {
+    font-weight: 600;
+}
+.form-section {
+    padding: 50px;
+}
+.selectize-parent {
+    padding-bottom: 6px;
+}
+.form-select {
+    color: #777777;
+}
+
+.btn {
+    height: 3rem;
+    font-size: large;
+    font-weight: 600;
+}
+
+#predicted-buy,
+#predicted-rent {
+    background-color: white;
+    text-align: right;
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.separator-right {
+    border-right: 2px solid black;
+}
+/* .col {
+    border: 1px solid #0f0;
+} */
+
+#map {
+    height: 100vh;
+}

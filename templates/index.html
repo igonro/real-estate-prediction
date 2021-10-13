@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/img/favicon.ico" />
+    <link rel="icon" href="/static/img/favicon.png" type="image/png" />
+    <title>Real Estate Prediction 🏠📈</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+
+
+<body class="container-fluid">
+    <div class="row align-items-center">
+        <div class="col-12 col-md-6 separator-right">
+            <section class="container vh-100 form-section">
+                <h2>Predict the price of your house!</h2>
+                <form id="my-form" class="mt-4" method="post" onsubmit="return predict(event);">
+                    <h5 class="mt-3">Basic information</h5>
+                    <div class="row mt-2 justify-content-center">
+                        <div class="col-4">
+                            <label for="sq-meters">Sq. meters built*</label>
+                        </div>
+                        <div class="col-4">
+                            <label for="n-rooms"># of Rooms*</label>
+                        </div>
+                        <div class="col-4">
+                            <label for="n-bathrooms"># of Bathrooms*</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="sq-meters" name="sq-meters" required>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="n-rooms" name="n-rooms" required>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="n-bathrooms" name="n-bathrooms" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2 justify-content-center">
+                        <div class="col-4">
+                            <label for="house-type">House type*</label>
+                        </div>
+                        <div class="col-4">
+                            <label for="floor">Floor*</label>
+                        </div>
+                        <div class="col-4">
+                            <label for="energy-cert">Energy Cert.*</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <select class="form-select" id="house-type" name="house-type">
+                                <option value="htype_flat">Flat</option>
+                                <option value="attic">Attic</option>
+                                <option value="htype_duplex">Duplex</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select class="form-select" id="floor" name="floor">
+                                <option value="floor_0">Ground floor</option>
+                                <option value="floor_1">1st</option>
+                                <option value="floor_2">2nd</option>
+                                <option value="floor_3">3rd</option>
+                                <option value="floor_4">4th</option>
+                                <option value="floor_5">5th</option>
+                                <option value="floor_6">6th</option>
+                                <option value="floor_7">7th</option>
+                                <option value="floor_8">8th</option>
+                                <option value="floor_9">9th or more</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select class="form-select" id="energy-cert" name="energy-cert">
+                                <option value="unknown">Unknown</option>
+                                <option value="energy_good">Good (A, B, C, D)</option>
+                                <option value="energy_bad">Bad (E, F, G)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h5 class="mt-3">Location</h5>
+                    <div class="col-12 mt-2 selectize-parent">
+                        <select class="form-select" id="district" name="district" placeholder="Select a district..."
+                            onchange="filterNeighborhoods()">
+                            <option value="">Select a district...</option>
+                            {%- for idx, district in enumerate(dist_neigh.keys()) %}
+                            <option value="d{{ idx }}">{{ district }}</option>
+                            {%- endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 mt-1 selectize-parent">
+                        <select class="form-select" id="neighborhood" name="neighborhood"
+                            placeholder="Select a neighborhood...*" onchange="setDistrict()" required>
+                            <option value="">Select a neighborhood...*</option>
+                            {%- for idx, district in enumerate(dist_neigh.keys()) -%}
+                            {% set neighborhoods = dist_neigh[district] -%}
+                            {% for idx2, neighborhood in enumerate(neighborhoods) %}
+                            <option value="d{{ idx }}n{{ idx2 }}">{{ neighborhood }}</option>
+                            {%- endfor %}
+                            {%- endfor %}
+                        </select>
+                    </div>
+                    <h5 class="mt-3">Extras</h5>
+                    <div class="row justify-content-start ps-3">
+                        <div class="col-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="is-exterior" name="is-exterior">
+                            <label class="form-check-label" for="is-exterior">Is Exterior</label>
+                        </div>
+                        <div class="col-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="has-lift" name="has-lift">
+                            <label class="form-check-label" for="has-lift">Has Lift</label>
+                        </div>
+                        <div class="col-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="has-parking" name="has-parking">
+                            <label class="form-check-label" for="has-parking">Has Parking</label>
+                        </div>
+                    </div>
+                    <button id="predict-btn" type="submit" class="btn btn-dark col-5 mt-4">Get your prediction!</button>
+                    <div class="row mt-4 justify-content-start">
+                        <div class="col-4">
+                            <label for="predicted-buy">
+                                <h5>Predicted Buy Price</h5>
+                            </label>
+                            <div class="input-group">
+                                <input id="predicted-buy" class="form-control" type="text" disabled>
+                                <span class="input-group-text">$</span>
+                            </div>
+                        </div>
+                        <div class="col-4 offset-2">
+                            <label for="predicted-rent">
+                                <h5>Predicted Monthly Rent</h5>
+                            </label>
+                            <div class="input-group">
+                                <input id="predicted-rent" class="form-control" type="text" disabled>
+                                <span class="input-group-text">$</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="col-12 col-md-6 nopadding">
+            <div id="map"></div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/scripts.js"></script>
+    <script>filterNeighborhoods();</script>
+</body>
