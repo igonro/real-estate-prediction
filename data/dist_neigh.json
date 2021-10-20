@@ -1,0 +1,79 @@
+{
+    "Arganzuela": ["Acacias", "Chopera", "Delicias", "Imperial", "Legazpi", "Palos de Moguer"],
+    "Barajas": ["Alameda de Osuna", "Campo de las Naciones-Corralejos", "Casco Histórico de Barajas", "Timón"],
+    "Carabanchel": [
+        "Abrantes",
+        "Buena Vista",
+        "Comillas",
+        "Opañel",
+        "Pau de Carabanchel",
+        "Puerta Bonita",
+        "San Isidro",
+        "Vista Alegre"
+    ],
+    "Centro": ["Chueca-Justicia", "Huertas-Cortes", "Lavapiés-Embajadores", "Malasaña-Universidad", "Palacio", "Sol"],
+    "Chamartín": ["Bernabéu-Hispanoamérica", "Castilla", "Ciudad Jardín", "El Viso", "Nueva España", "Prosperidad"],
+    "Chamberí": ["Almagro", "Arapiles", "Gaztambide", "Nuevos Ministerios-Ríos Rosas", "Trafalgar", "Vallehermoso"],
+    "Ciudad Lineal": [
+        "Colina",
+        "Concepción",
+        "Costillares",
+        "Pueblo Nuevo",
+        "Quintana",
+        "San Juan Bautista",
+        "San Pascual",
+        "Ventas"
+    ],
+    "Fuencarral": [
+        "Arroyo del Fresno",
+        "Fuentelarreina",
+        "La Paz",
+        "Las Tablas",
+        "Mirasierra",
+        "Montecarmelo",
+        "Peñagrande",
+        "Pilar",
+        "Tres Olivos - Valverde"
+    ],
+    "Hortaleza": [
+        "Apóstol Santiago",
+        "Canillas",
+        "Conde Orgaz-Piovera",
+        "Palomas",
+        "Pinar del Rey",
+        "Sanchinarro",
+        "Valdebebas - Valdefuentes",
+        "Virgen del Cortijo - Manoteras"
+    ],
+    "Latina": ["Aluche", "Campamento", "Los Cármenes", "Lucero", "Puerta del Ángel", "Águilas"],
+    "Moncloa": [
+        "Aravaca",
+        "Argüelles",
+        "Casa de Campo",
+        "Ciudad Universitaria",
+        "El Plantío",
+        "Valdemarín",
+        "Valdezarza"
+    ],
+    "Moratalaz": ["Fontarrón", "Marroquina", "Media Legua", "Vinateros"],
+    "Puente de Vallecas": ["Entrevías", "Numancia", "Palomeras Bajas", "Palomeras sureste", "Portazgo", "San Diego"],
+    "Retiro": ["Adelfas", "Estrella", "Ibiza", "Jerónimos", "Niño Jesús", "Pacífico"],
+    "Salamanca": ["Castellana", "Fuente del Berro", "Goya", "Guindalera", "Lista", "Recoletos"],
+    "Tetuán": [
+        "Bellas Vistas",
+        "Berruguete",
+        "Cuatro Caminos",
+        "Cuzco-Castillejos",
+        "Valdeacederas",
+        "Ventilla-Almenara"
+    ],
+    "Usera": ["12 de Octubre-Orcasur", "Almendrales", "Moscardó", "Orcasitas", "Pradolongo", "San Fermín", "Zofío"],
+    "Vicálvaro": [
+        "Ambroz",
+        "Casco Histórico de Vicálvaro",
+        "El Cañaveral - Los Berrocales",
+        "Valdebernardo - Valderribas"
+    ],
+    "Villa de Vallecas": ["Casco Histórico de Vallecas", "Ensanche de Vallecas - La Gavia", "Santa Eugenia"],
+    "Villaverde": ["Butarque", "Los Rosales", "Los Ángeles", "San Andrés", "San Cristóbal"]
+}
