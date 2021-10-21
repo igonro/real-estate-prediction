@@ -83,7 +83,7 @@ const filterNeighborhoods = () => {
     for (const [k, marker] of Object.entries(markers)) marker.setIcon(blackIcon);
     if (distSelect[0].value !== "") {
         markers[distSelect[0].value].setIcon(goldIcon);
-        console.log(markers[distSelect[0].value].options.title);
+        map.setView(markers[distSelect[0].value].getLatLng(), 13);
     }
     let neighOption = "";
     if (neighSelect[0].innerText !== "") neighOption = neighSelect[0].innerText;
